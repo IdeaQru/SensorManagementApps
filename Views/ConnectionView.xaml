@@ -1,0 +1,399 @@
+<UserControl x:Class="SensorMonitorDesktop.Views.ConnectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <!-- Modern Color Palette -->
+        <SolidColorBrush x:Key="PrimaryBrush" Color="#2C3E50" />
+        <SolidColorBrush x:Key="AccentBrush" Color="#3498DB" />
+        <SolidColorBrush x:Key="SuccessBrush" Color="#27AE60" />
+        <SolidColorBrush x:Key="SurfaceBrush" Color="#ECF0F1" />
+        <SolidColorBrush x:Key="BorderBrush" Color="#BDC3C7" />
+        <SolidColorBrush x:Key="TextPrimaryBrush" Color="#2C3E50" />
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#7F8C8D" />
+
+        <!-- Modern Button Style -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="20,10" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#2980B9" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#95A5A6" />
+                                <Setter Property="Cursor" Value="Arrow" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Secondary Button Style -->
+        <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+            <Setter Property="Background" Value="#E74C3C" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#C0392B" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern ComboBox Style -->
+        <Style x:Key="ModernComboBox" TargetType="ComboBox">
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="10,8" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+        <!-- Modern TextBox Style -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="10,8" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <!-- Label Style -->
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,0,0,6" />
+        </Style>
+
+        <!-- Section Header Style -->
+        <Style x:Key="SectionHeader" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+            <Setter Property="Margin" Value="0,0,0,15" />
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Page Header -->
+            <Border Grid.Row="0" 
+                    Background="{StaticResource PrimaryBrush}"
+                    CornerRadius="8"
+                    Padding="25,20"
+                    Margin="0,0,0,25">
+                <StackPanel>
+                    <TextBlock Text="⚡ Connection Configuration"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="White" />
+                    <TextBlock Text="Configure your sensor data acquisition settings"
+                               FontSize="13"
+                               Foreground="#BDC3C7"
+                               Margin="0,5,0,0" />
+                </StackPanel>
+            </Border>
+
+            <!-- Connection Type Card -->
+            <Border Grid.Row="1"
+                    Background="White"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Padding="25"
+                    Margin="0,0,0,20">
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000" 
+                                    Opacity="0.08" 
+                                    BlurRadius="10" 
+                                    ShadowDepth="2" 
+                                    Direction="270" />
+                </Border.Effect>
+
+                <StackPanel>
+                    <TextBlock Text="🔌 Connection Type" Style="{StaticResource SectionHeader}" />
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="Transport Protocol" Style="{StaticResource FieldLabel}" />
+                        <ComboBox Grid.Column="1"
+                                  ItemsSource="{Binding ConnectionTypes}"
+                                  SelectedItem="{Binding SelectedConnectionType}"
+                                  Style="{StaticResource ModernComboBox}"
+                                  Width="280"
+                                  HorizontalAlignment="Left" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Serial Configuration Card -->
+            <Border Grid.Row="2"
+                    Background="White"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Padding="25"
+                    Margin="0,0,0,20">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedConnectionType}" Value="Serial">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000" 
+                                    Opacity="0.08" 
+                                    BlurRadius="10" 
+                                    ShadowDepth="2" 
+                                    Direction="270" />
+                </Border.Effect>
+
+                <StackPanel>
+                    <TextBlock Text="📡 Serial Port Settings" Style="{StaticResource SectionHeader}" />
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="280" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Serial Port -->
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Serial Port" Style="{StaticResource FieldLabel}" />
+                        <ComboBox Grid.Row="0" Grid.Column="1"
+                                  ItemsSource="{Binding AvailablePorts}"
+                                  SelectedItem="{Binding SelectedPort}"
+                                  Style="{StaticResource ModernComboBox}" />
+                        <Button Grid.Row="0" Grid.Column="2"
+                                Content="🔄 Refresh"
+                                Command="{Binding RefreshPortsCommand}"
+                                Style="{StaticResource ModernButton}"
+                                Width="120"
+                                HorizontalAlignment="Left"
+                                Margin="15,0,0,0" />
+
+                        <!-- Baud Rate -->
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Baud Rate" Style="{StaticResource FieldLabel}" />
+                        <ComboBox Grid.Row="2" Grid.Column="1"
+                                  ItemsSource="{Binding BaudRates}"
+                                  SelectedItem="{Binding SelectedBaudRate}"
+                                  Style="{StaticResource ModernComboBox}" />
+
+                        <!-- Parity -->
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Parity" Style="{StaticResource FieldLabel}" />
+                        <ComboBox Grid.Row="4" Grid.Column="1"
+                                  ItemsSource="{Binding ParityOptions}"
+                                  SelectedItem="{Binding SelectedParity}"
+                                  Style="{StaticResource ModernComboBox}" />
+
+                        <!-- Data & Stop Bits -->
+                        <TextBlock Grid.Row="6" Grid.Column="0" Text="Advanced" Style="{StaticResource FieldLabel}" />
+                        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+                            <StackPanel Margin="0,0,15,0">
+                                <TextBlock Text="Data Bits" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,4" />
+                                <TextBox Text="{Binding DataBits}"
+                                         Style="{StaticResource ModernTextBox}"
+                                         Width="80" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="Stop Bits" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,4" />
+                                <ComboBox ItemsSource="{Binding StopBitOptions}"
+                                          SelectedItem="{Binding SelectedStopBits}"
+                                          Style="{StaticResource ModernComboBox}"
+                                          Width="100" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Network Configuration Card -->
+            <Border Grid.Row="2"
+                    Background="White"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Padding="25"
+                    Margin="0,0,0,20">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedConnectionType}" Value="Network">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000" 
+                                    Opacity="0.08" 
+                                    BlurRadius="10" 
+                                    ShadowDepth="2" 
+                                    Direction="270" />
+                </Border.Effect>
+
+                <StackPanel>
+                    <TextBlock Text="🌐 Network Settings" Style="{StaticResource SectionHeader}" />
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="280" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Protocol -->
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Protocol" Style="{StaticResource FieldLabel}" />
+                        <ComboBox Grid.Row="0" Grid.Column="1"
+                                  ItemsSource="{Binding NetworkModes}"
+                                  SelectedItem="{Binding SelectedNetworkMode}"
+                                  Style="{StaticResource ModernComboBox}" />
+
+                        <!-- Host -->
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Host / IP Address" Style="{StaticResource FieldLabel}" />
+                        <TextBox Grid.Row="2" Grid.Column="1"
+                                 Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource ModernTextBox}" />
+
+                        <!-- Port -->
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Port Number" Style="{StaticResource FieldLabel}" />
+                        <TextBox Grid.Row="4" Grid.Column="1"
+                                 Text="{Binding Port, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource ModernTextBox}"
+                                 Width="130"
+                                 HorizontalAlignment="Left" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Action Panel -->
+            <Border Grid.Row="3"
+                    Background="{StaticResource SurfaceBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Padding="25">
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000" 
+                                    Opacity="0.05" 
+                                    BlurRadius="8" 
+                                    ShadowDepth="1" 
+                                    Direction="270" />
+                </Border.Effect>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0"
+                            Content="▶ Connect"
+                            Command="{Binding ConnectCommand}"
+                            Style="{StaticResource ModernButton}"
+                            Width="140"
+                            Height="42"
+                            FontSize="15" />
+
+                    <Button Grid.Column="1"
+                            Content="⏹ Disconnect"
+                            Command="{Binding DisconnectCommand}"
+                            Style="{StaticResource SecondaryButton}"
+                            Width="140"
+                            Height="42"
+                            FontSize="15"
+                            Margin="12,0,0,0" />
+
+                    <Border Grid.Column="3"
+                            Background="White"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="6"
+                            Padding="15,10"
+                            VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Width="12" Height="12" 
+                                     Fill="{StaticResource SuccessBrush}"
+                                     VerticalAlignment="Center"
+                                     Margin="0,0,10,0" />
+                            <TextBlock Text="Status: " 
+                                       FontWeight="SemiBold" 
+                                       FontSize="13"
+                                       Foreground="{StaticResource TextPrimaryBrush}"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding StatusText}"
+                                       FontSize="13"
+                                       Foreground="{StaticResource TextSecondaryBrush}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
